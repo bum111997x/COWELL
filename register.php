@@ -1,3 +1,4 @@
+<?php include 'include/functions.php' ?>
 <!doctype html>
 <html lang="en">
 
@@ -20,61 +21,89 @@
 <body class="">
 
     <main class="form-signin w-100 m-auto">
-        <form>
+        <form method="post" action="register-process.php">
             <img class="mb-4 d-block m-auto" src="assets/img/bootstrap-logo.svg" alt="" width="72" height="57">
             <h1 class="h3 mb-3 fw-normal text-center">Sign up</h1>
             <div class="row mb-2">
                 <div class="form-group col-6">
-                    <input type="text" class="form-control rounded" placeholder="FirstName">
+                    <input type="text" class="form-control rounded <?php echo isset($_SESSION['errors']['firstName']) ? 'is-invalid' : '' ?> " value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['firstName'] : '' ?>" placeholder="FirstName" name="firstName">
+                    <div class="invalid-feedback">
+                        <?php echo isset($_SESSION['errors']['firstName']) ?  $_SESSION['errors']['firstName'] : ''; ?>
+                    </div>
                 </div>
                 <div class="form-group col-6">
-                    <input type="text" class="form-control rounded" placeholder="SurName">
+                    <input type="text" class="form-control <?php echo isset($_SESSION['errors']['surName']) ? 'is-invalid' : '' ?> rounded" placeholder="SurName" name="surName" value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['surName'] : '' ?>">
+                    <div class="invalid-feedback">
+                        <?php echo isset($_SESSION['errors']['surName']) ?  $_SESSION['errors']['surName'] : ''; ?>
+                    </div>
                 </div>
             </div>
             <div class="form-group col-12 mb-2">
-                <input type="text" class="form-control rounded" placeholder="Mobile Number or Email Address">
+                <input type="text" class="form-control <?php echo isset($_SESSION['errors']['email']) ? 'is-invalid' : '' ?> rounded" value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['email'] : '' ?>" placeholder="Mobile Number or Email Address" name="email">
+                <div class="invalid-feedback">
+                    <?php echo isset($_SESSION['errors']['email']) ?  $_SESSION['errors']['email'] : ''; ?>
+                </div>
             </div>
             <div class="form-group col-12 mb-2">
-                <input type="password" class="form-control rounded" placeholder="New Password">
+                <input type="password" class="form-control <?php echo isset($_SESSION['errors']['password']) ? 'is-invalid' : '' ?> rounded" placeholder="New Password" name="password">
+                <div class="invalid-feedback">
+                    <?php echo isset($_SESSION['errors']['password']) ?  $_SESSION['errors']['password'] : ''; ?>
+                </div>
             </div>
             <div class="col-12 mb-2">
                 <label class="text-lef mb-1" for="">Date of birth</label>
                 <div class="row">
                     <div class="col-4 form-group">
-                        <select class="form-control" name="date" id="date">
+                        <!-- <select class="form-control" name="date" id="date">
                             <option value="" disabled selected hidden>Date</option>
-                        </select>
+                        </select> -->
+                        <input type="number" name="date" class="form-control <?php echo isset($_SESSION['errors']['date']) ? 'is-invalid' : '' ?>" value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['date'] : '' ?>" placeholder="date">
+                        <div class="invalid-feedback">
+                            <?php echo isset($_SESSION['errors']['date']) ?  $_SESSION['errors']['date'] : ''; ?>
+                        </div>
                     </div>
                     <div class="col-4 form-group">
-                    <select class="form-control" name="month" id="month">
+                        <!-- <select class="form-control" name="month" id="month">
                             <option value="" disabled selected hidden>Month</option>
-                        </select>
+                        </select> -->
+                        <input type="number" name="month" class="form-control <?php echo isset($_SESSION['errors']['month']) ? 'is-invalid' : '' ?>" value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['month'] : '' ?>" placeholder="month">
+                        <div class="invalid-feedback">
+                            <?php echo isset($_SESSION['errors']['month']) ?  $_SESSION['errors']['month'] : ''; ?>
+                        </div>
                     </div>
                     <div class="col-4 form-group">
-                    <select class="form-control" name="year" id="year">
+                        <!-- <select class="form-control" name="year" id="year">
                             <option value="" disabled selected hidden>Year</option>
-                        </select>
+                        </select> -->
+                        <input type="number" name="year" class="form-control <?php echo isset($_SESSION['errors']['year']) ? 'is-invalid' : '' ?>" value="<?php echo isset($_SESSION['old']) ? $_SESSION['old']['year'] : '' ?>" placeholder="year">
+                        <div class="invalid-feedback">
+                            <?php echo isset($_SESSION['errors']['year']) ?  $_SESSION['errors']['year'] : ''; ?>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-2 ">
                 <label class="mb-1" for="">Gender</label>
                 <div class="col-4 custom-control custom-radio custom-control-inline  ">
                     <div class="p-1 border rounded bg-white">
-                        <label class="custom-control-label" for="customRadioInline1">Male</label>
-                        <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label <?php echo isset($_SESSION['errors']['gender']) ? 'is-invalid' : '' ?>" for="male">Male</label>
+                        <input type="radio" id="male" name="gender" class="custom-control-input" value="Male">
+                    </div>
+                    <div class="invalid-feedback">
+                        <?php echo isset($_SESSION['errors']['gender']) ?  $_SESSION['errors']['gender'] : ''; ?>
+                    </div>
+                </div>
+
+                <div class="col-4 custom-control custom-radio custom-control-inline">
+                    <div class="p-1 border rounded bg-white">
+                        <label class="custom-control-label" for="female">Female</label>
+                        <input type="radio" id="female" name="gender" class="custom-control-input" value="Female">
                     </div>
                 </div>
                 <div class="col-4 custom-control custom-radio custom-control-inline">
                     <div class="p-1 border rounded bg-white">
-                        <label class="custom-control-label" for="customRadioInline2">Female</label>
-                        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                    </div>
-                </div>
-                <div class="col-4 custom-control custom-radio custom-control-inline">
-                    <div class="p-1 border rounded bg-white">
-                        <label class="custom-control-label" for="customRadioInline3">Orther</label>
-                        <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="orther">Orther</label>
+                        <input type="radio" id="orther" name="gender" class="custom-control-input" value="Orther">
                     </div>
                 </div>
             </div>
@@ -89,3 +118,7 @@
 </body>
 
 </html>
+<?php
+unset($_SESSION['errors']);
+unset($_SESSION['old']);
+?>
